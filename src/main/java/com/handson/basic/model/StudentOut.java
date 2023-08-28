@@ -3,6 +3,7 @@ package com.handson.basic.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.handson.basic.util.AWSService;
 import com.handson.basic.util.Dates;
 import org.joda.time.LocalDateTime;
 
@@ -38,6 +39,70 @@ public class StudentOut {
 
     private Integer satscore;
     private Double graduationscore;
+
+    private Double avgscore;
+
+    public static StudentOut of(Student student, AWSService awsService) {
+        StudentOut res = new StudentOut();
+        res.id = student.getId();
+        res.createdat = student.getCreatedAt();
+        res.fullname = student.getFullname();
+        res.birthdate = student.getBirthDate();
+        res.satscore = student.getSatScore();
+        res.graduationscore = student.getGraduationScore();
+        res.phone = student.getPhone();
+        res.profilepicture = awsService.generateLink(student.getProfilePicture());
+        res.avgscore = null;
+        return res;
+    }
+
+    public void setCreatedat(Date createdat) {
+        this.createdat = createdat;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    public Integer getSatscore() {
+        return satscore;
+    }
+
+    public void setSatscore(Integer satscore) {
+        this.satscore = satscore;
+    }
+
+    public Double getGraduationscore() {
+        return graduationscore;
+    }
+
+    public void setGraduationscore(Double graduationscore) {
+        this.graduationscore = graduationscore;
+    }
+
+    public Double getAvgscore() {
+        return avgscore;
+    }
+
+    public void setAvgscore(Double avgscore) {
+        this.avgscore = avgscore;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getProfilepicture() {
+        return profilepicture;
+    }
+
+    public void setProfilepicture(String profilepicture) {
+        this.profilepicture = profilepicture;
+    }
 
     private String phone;
     private String profilepicture;
